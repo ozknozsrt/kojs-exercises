@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <h1 data-bind="text: choice"></h1>
+    <button data-bind="click: handleChange">DICE</button>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script>
+        var AppViewModel = function () {
+            var self = this;
+            var dt = ['YES', 'NO'];
+            self.choice = ko.observableArray([]);
+
+            self.rand = function () {
+                var rnd = dt[Math.floor(Math.random() * 2)];
+                self.choice(rnd)
+                console.log(rnd)
+            }
+
+            self.handleChange = function () {
+                self.rand()
+            }
+        }
+        ko.applyBindings(new AppViewModel());
+    </script>
+</body>
+
+</html>
