@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #app {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border: 1px solid #ddd;
+            padding: 60px 40px;
+            background: #fff;
+            box-shadow: 0 3px 9px #eee;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        h2 {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 18px;
+            color: #666;
+        }
+
+        button {
+            background: blueviolet;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 11px 23px;
+            display: block;
+            border: 0;
+            border-radius: 5px;
+            margin-top: 40px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #a14fee;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1 data-bind="text: emoji"></h1>
+        <h2 data-bind="text: unicodeName"></h2>
+        <button data-bind="click: randomClick">Random</button>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script>
+        var vm = function () {
+            var self = this;
+            self.emoji = ko.observableArray();
+            self.unicodeName = ko.observableArray();
+
+            var apiUrl = 'https://emoji-api.com/emojis?access_key=d3885313fd71e3409f37642b5af1a3972ffc8299';
+
+            var jx = function () {
+                $.getJSON(apiUrl, function (data) {
+                    var v = data[Math.floor(Math.random() * data.length)];
+                    self.emoji(v.character);
+                    self.unicodeName(v.unicodeName);
+                    console.log(data)
+                });
+            }
+
+            $(function () {
+                jx();
+            });
+
+            self.randomClick = function () {
+                jx();
+            }
+
+        };
+        ko.applyBindings(new vm(), document.getElementById("app"));
+    </script>
+</body>
+
+</html>
