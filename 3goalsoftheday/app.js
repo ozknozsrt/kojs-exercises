@@ -1,3 +1,7 @@
+$(function() {
+  $('#goalInput').focus();
+});
+
 var vm = function () {
   var self = this;
   self.input = ko.observable("");
