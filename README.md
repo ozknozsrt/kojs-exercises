@@ -1,5 +1,6 @@
 # kojs-exercises
-Simple Knockout JS apps for my practice
+Simple Knockout JS apps for my practice  
+
 
 Exercise | Description
 ------------ | -------------
