@@ -11,9 +11,17 @@ var vm = function () {
     localStorage.setItem("lang", value);
     $("html").attr("lang", value);
   });
-  $("html").attr("lang", localStorage.getItem('lang'));
+  $("html").attr("lang", localStorage.getItem("lang"));
   self.ph = i18nextko.t("placeholder");
   // */init Lang
+
+  // First letter make uppercase
+  self.input.subscribe(function () {
+    if (self.input() != "") {
+      var t = self.input()[0].toUpperCase() + self.input().slice(1);
+      self.input(t);
+    }
+  });
 
   self.addGoal = function () {
     if (self.input() != "") {
