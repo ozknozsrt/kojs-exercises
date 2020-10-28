@@ -2,6 +2,8 @@
 
 Plan your day by identifying the three most important things to focus on with counter. (i18next was used)
 
+[Demo](https://ozknozsrt.github.io/kojs-exercises/3goalsoftheday/)
+
 ### Features
 - Localization with i18next. And saves the selected language to localStorage.
 - After your 3 goals has been entered, the 24-hour counter starts.
