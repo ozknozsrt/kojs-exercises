@@ -2,7 +2,7 @@
 
 Plan your day by identifying the three most important things to focus on with counter. (i18next was used)
 
-![3 Goals of the Day](screenshot.png)
+![3 Goals of the Day](screenshotimg.png)
 
 ### Nice to have
 - [ ] localStorage
