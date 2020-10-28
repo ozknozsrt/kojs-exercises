@@ -5,6 +5,6 @@ Plan your day by identifying the three most important things to focus on with co
 ![3 Goals of the Day](screenshotimg.png)
 
 ### Nice to have
-- [ ] localStorage
+- [ ] localStorage data and counter
 - [ ] Marking done goals with strike-through
 - [ ] Share goals your friends
