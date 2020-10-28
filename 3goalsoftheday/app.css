@@ -1,0 +1,258 @@
+@charset "UTF-8";
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 15px;
+  font-family: "Nunito", sans-serif;
+}
+
+input,
+button,
+select {
+  font-family: "Nunito", sans-serif;
+}
+
+#app {
+  border: 1px solid #eee;
+  width: 430px;
+  border-radius: 5px;
+  padding: 2.5rem 2rem;
+  -webkit-box-shadow: 0 10px 10px #eee;
+          box-shadow: 0 10px 10px #eee;
+  margin-top: 15vh;
+  position: relative;
+}
+
+#app .langchanger {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  position: absolute;
+  top: -4.8rem;
+  right: 0;
+}
+
+#app .langchanger span {
+  text-align: right;
+  font-size: 12px;
+  margin-bottom: 5px;
+  width: 100%;
+  color: #444;
+}
+
+#app .langchanger select {
+  height: 30px;
+  width: 100px;
+  padding: 0 4px;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  color: #444;
+}
+
+#app .langchanger select option {
+  font-size: 13px;
+}
+
+#app #form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 7.5px;
+}
+
+#app #form input {
+  border-radius: 3px;
+  height: 50px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  padding: 0 10px;
+  width: 70%;
+}
+
+#app #form input:focus {
+  border-color: #7985e9;
+}
+
+#app #form button {
+  background: #4555e0;
+  color: #fff;
+  font-weight: bold;
+  border: 1px solid transparent;
+  width: 30%;
+  height: 48px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+#app #form button:hover {
+  background: #2b3ddc;
+}
+
+#app #form button:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+
+#app #form button:disabled {
+  background: #be9494;
+  cursor: not-allowed;
+}
+
+#app .card {
+  margin-top: 30px;
+}
+
+#app .card .card-header {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 15px 5px;
+}
+
+#app .card .card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+#app .card ul {
+  padding: 0;
+  margin-bottom: 30px;
+  list-style: none;
+}
+
+#app .card ul li {
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+}
+
+#app .card ul li::before {
+  content: "🚀";
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#app .card ul li:last-child {
+  border-bottom: 0;
+}
+
+#app .card .nogoal {
+  font-size: 14px;
+  width: 100%;
+  padding: 0 5px;
+  color: #555;
+}
+
+#app .card .card-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 7.5px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#app .card .card-footer > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 7.5px;
+  width: 100%;
+}
+
+#app .card .card-footer button {
+  height: 45px;
+  padding: 0 15px;
+  font-size: 15px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-weight: bold;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+}
+
+#app .card .card-footer button:first-of-type {
+  background: #0ebd48;
+  color: #fff;
+}
+
+#app .card .card-footer button:first-of-type:hover {
+  background: #0ca13d;
+}
+
+#app .card .card-footer button:first-of-type:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+
+#app .card .card-footer button:last-of-type {
+  background: transparent;
+  border: 1px solid #bd140e;
+  color: #bd140e;
+}
+
+#app .card .card-footer button:last-of-type:hover {
+  border-color: #a1110c;
+  color: #a1110c;
+}
+
+#app .card .card-footer button:last-of-type:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+/*# sourceMappingURL=app.css.map */

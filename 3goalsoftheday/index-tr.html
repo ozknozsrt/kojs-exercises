@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Goals of the Day</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <form id="form" data-bind="submit: addGoal">
+            <input type="text" id="goalInput" autocomplete="off" data-bind="value: input, valueUpdate: 'afterkeydown'"
+                placeholder="Hedefinizi girin">
+            <button type="submit" id="submitBtn">Hedef Ekle</button>
+        </form>
+        <div class="card">
+            <div class="card-header">
+                <h3>Bugünkü Hedefleriniz</h3>
+            </div>
+            <ul data-bind="foreach: data">
+                <li data-bind="text: $data"></li>
+            </ul>
+            <div class="nogoal" data-bind="hidden: data().length > 0">
+                Henüz bir hedefiniz bulunmamaktadır.
+            </div>
+            <div class="card-footer" data-bind="visible: data().length >= 3">
+                <span data-bind="html: countdown"></span>
+                <div>
+                    <button id="startCounter" data-bind="hidden: countdown, click: startCounter, enable: data().length >= 3">Sayacı Başlat</button>
+                    <button id="stopCounter" data-bind="hidden: startCounter, visible: countdown, click: stopCounter, enable: data().length >= 3">Sayacı Durdur</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

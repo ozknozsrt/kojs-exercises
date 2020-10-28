@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Goals of the Day</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+
+        <p class="langchanger" style="display: flex;">
+            <span data-bind="i18n: 'choiceLang'"></span>
+            <select data-bind="value: language">
+                <option value="en">English</option>
+                <option value="tr">Turkish</option>
+            </select>
+        </p>
+
+
+        <form id="form" data-bind="submit: addGoal">
+            <input type="text" id="goalInput" autocomplete="off" data-bind="attr: {placeholder: ph}, value: input, valueUpdate: 'afterkeydown'">
+            <button type="submit" id="submitBtn" data-bind="i18n: 'submitBtn'"></button>
+        </form>
+        <div class="card">
+            <div class="card-header">
+                <h3 data-bind="i18n: 'cardHeader'"></h3>
+            </div>
+            <ul data-bind="foreach: data">
+                <li data-bind="text: $data"></li>
+            </ul>
+            <div class="nogoal" data-bind="i18n: 'nogoal', hidden: data().length > 0">
+            </div>
+            <div class="card-footer" data-bind="visible: data().length >= 3">
+                <span data-bind="html: countdown"></span>
+                <div>
+                    <button id="startCounter"
+                        data-bind="i18n: 'startCounter', hidden: countdown, click: startCounter, enable: data().length >= 3">Sayacı
+                        Başlat</button>
+                    <button id="stopCounter"
+                        data-bind="i18n: 'stopCounter', hidden: startCounter, visible: countdown, click: stopCounter, enable: data().length >= 3">Sayacı
+                        Durdur</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="i18next-ko.bundle.js"></script>
+    <script src="lang.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
