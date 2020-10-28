@@ -5,10 +5,13 @@ var vm = function () {
   self.countdown = ko.observable("");
 
   // init Lang
-  self.language = ko.observable("en");
+  self.language = ko.observable(localStorage.getItem("lang"));
   self.language.subscribe(function (value) {
     i18nextko.setLanguage(value);
+    localStorage.setItem("lang", value);
+    $("html").attr("lang", value);
   });
+  $("html").attr("lang", localStorage.getItem('lang'));
   self.ph = i18nextko.t("placeholder");
   // */init Lang
 
