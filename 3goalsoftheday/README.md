@@ -2,6 +2,12 @@
 
 Plan your day by identifying the three most important things to focus on with counter. (i18next was used)
 
+### Features
+- Localization with i18next. And saves the selected language to localStorage.
+- After your 3 goals has been entered, the 24-hour counter starts.
+- After your 3 entering goals, the input and button disabling.
+- Start Counter and Stop Counter buttons
+
 ![3 Goals of the Day](screenshotimg.png)
 
 ### Nice to have
