@@ -14,5 +14,5 @@ Plan your day by identifying the three most important things to focus on with co
 
 ### Nice to have
 - [ ] localStorage data and counter
-- [ ] Marking done goals with strike-through
+- [x] Marking done goals with strike-through
 - [ ] Share goals your friends
