@@ -167,6 +167,7 @@ select {
 #app .card ul li {
   border-bottom: 1px solid #eee;
   padding: 10px;
+  cursor: pointer;
 }
 
 #app .card ul li::before {
@@ -177,6 +178,15 @@ select {
 
 #app .card ul li:last-child {
   border-bottom: 0;
+}
+
+#app .card ul li.active {
+  position: relative;
+  text-decoration: line-through;
+}
+
+#app .card ul li.active::before {
+  content: "✅";
 }
 
 #app .card .nogoal {

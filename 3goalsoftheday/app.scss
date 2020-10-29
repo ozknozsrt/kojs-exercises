@@ -132,6 +132,7 @@ select {
       li {
         border-bottom: 1px solid #eee;
         padding: 10px;
+        cursor: pointer;
         &::before {
           content: "🚀";
           display: inline-block;
@@ -139,6 +140,13 @@ select {
         }
         &:last-child {
           border-bottom: 0;
+        }
+        &.active {
+          position: relative;
+          text-decoration: line-through;
+          &::before {
+            content: "✅";
+          }
         }
       }
     }

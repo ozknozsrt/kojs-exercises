@@ -1,5 +1,5 @@
-$(function() {
-  $('#goalInput').focus();
+$(function () {
+  $("#goalInput").focus();
 });
 
 var vm = function () {
@@ -38,6 +38,12 @@ var vm = function () {
       $("#goalInput").attr("disabled", true);
     }
   };
+
+  // Click to marking done goals with strike-through
+  self.isActive = (function(x, y) {
+    //console.log(x, y.target);
+    $(y.target).toggleClass('active');
+  })
 
   var timer = null,
     interval = 1000;

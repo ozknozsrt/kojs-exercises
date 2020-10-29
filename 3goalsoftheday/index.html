@@ -32,7 +32,7 @@
                 <h3 data-bind="i18n: 'cardHeader'"></h3>
             </div>
             <ul data-bind="foreach: data">
-                <li data-bind="text: $data"></li>
+                <li data-bind="text: $data, click: $parent.isActive"></li>
             </ul>
             <div class="nogoal" data-bind="i18n: 'nogoal', hidden: data().length > 0">
             </div>
