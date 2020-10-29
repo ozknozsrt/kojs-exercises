@@ -17,3 +17,4 @@ Plan your day by identifying the three most important things to focus on with co
 - [ ] localStorage data and counter
 - [x] Marking done goals with strike-through
 - [ ] Share goals your friends
+- [ ] Confetti explosion when done all goals
