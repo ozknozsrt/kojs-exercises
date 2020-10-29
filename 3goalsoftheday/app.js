@@ -40,10 +40,27 @@ var vm = function () {
   };
 
   // Click to marking done goals with strike-through
-  self.isActive = (function(x, y) {
+  self.isActive = function (x, y) {
     //console.log(x, y.target);
-    $(y.target).toggleClass('active');
-  })
+    $(y.target).toggleClass("active");
+
+    // Finished Goals
+    var filterActivedEl = $("li").filter(".active");
+    if (filterActivedEl.length == 3) {
+      Draw();
+      clearInterval(timer);
+      var il = document.querySelector('.card-footer').firstElementChild.childNodes[0];
+      var il2 = document.querySelector('.card-footer').firstElementChild.childNodes[2];
+      if (self.language() == "en") {
+        il.textContent = "You've done your goals! ";
+        il2.textContent = "";
+      } else {
+        il.textContent = "Hedeflerinizi tamamladınız! ";
+      }
+      $("#stopCounter").hide();
+      $("#RefreshForNewGoals").show();
+    }
+  };
 
   var timer = null,
     interval = 1000;
@@ -62,6 +79,8 @@ var vm = function () {
         return `Hedefinize kalan son <b>${s} saat ${dk} dk ${sn} sn</b>`;
       }
     }
+
+    
   }
 
   self.startCounter = function () {

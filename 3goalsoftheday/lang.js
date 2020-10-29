@@ -11,6 +11,7 @@ i18nextko.init(
         stopCounter: "Stop Counter",
         stoppedCounter: "You Stopped Your Goal!",
         startedCounter: "The last <b>{{s}} hours {{dk}} mins {{sn}} secs</b> left to your goals",
+        RefreshForNewGoals: "Add New Goals",
 
         title: "i18next-ko Example",
         text: "This is an example for i18next-ko. Please select a language:",
@@ -32,6 +33,7 @@ i18nextko.init(
         stopCounter: "Sayacı Durdur",
         stoppedCounter: "Hedefinizi Durdurdunuz!",
         startedCounter: "Hedefinize kalan son <b>{{s}} saat {{dk}} dk {{sn}} sn</b>",
+        RefreshForNewGoals: "Yeni Hedefler Ekle",
 
         title: "<h3>i18next-ko Beispiel</h3>",
         text: "Dies ist ein Beispiel für i18next-ko. Wählen Sie eine Sprache:",

@@ -51,6 +51,7 @@ select {
           box-shadow: 0 10px 10px #eee;
   margin-top: 15vh;
   position: relative;
+  z-index: 1;
 }
 
 #app .langchanger {
@@ -232,37 +233,64 @@ select {
   cursor: pointer;
 }
 
-#app .card .card-footer button:first-of-type {
+#app .card .card-footer button#startCounter {
   background: #0ebd48;
   color: #fff;
 }
 
-#app .card .card-footer button:first-of-type:hover {
+#app .card .card-footer button#startCounter:hover {
   background: #0ca13d;
 }
 
-#app .card .card-footer button:first-of-type:active {
+#app .card .card-footer button#startCounter:active {
   -webkit-transform: scale(0.98);
           transform: scale(0.98);
   -webkit-transform-origin: center;
           transform-origin: center;
 }
 
-#app .card .card-footer button:last-of-type {
+#app .card .card-footer button#stopCounter {
   background: transparent;
   border: 1px solid #bd140e;
   color: #bd140e;
 }
 
-#app .card .card-footer button:last-of-type:hover {
+#app .card .card-footer button#stopCounter:hover {
   border-color: #a1110c;
   color: #a1110c;
 }
 
-#app .card .card-footer button:last-of-type:active {
+#app .card .card-footer button#stopCounter:active {
   -webkit-transform: scale(0.98);
           transform: scale(0.98);
   -webkit-transform-origin: center;
           transform-origin: center;
+}
+
+#app .card .card-footer button#RefreshForNewGoals {
+  display: none;
+  background: #4555e0;
+  color: #fff;
+}
+
+#app .card .card-footer button#RefreshForNewGoals:hover {
+  background: #2b3ddc;
+}
+
+#app .card .card-footer button#RefreshForNewGoals:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+
+canvas {
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 /*# sourceMappingURL=app.css.map */

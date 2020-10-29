@@ -11,8 +11,10 @@
 
 <body>
 
-    <div id="app">
 
+    <canvas id="canvas"></canvas>
+
+    <div id="app">
 
         <p class="langchanger" style="display: flex;">
             <span data-bind="i18n: 'choiceLang'"></span>
@@ -24,7 +26,8 @@
 
 
         <form id="form" data-bind="submit: addGoal">
-            <input type="text" id="goalInput" autocomplete="off" data-bind="attr: {placeholder: ph}, value: input, valueUpdate: 'afterkeydown'">
+            <input type="text" id="goalInput" autocomplete="off"
+                data-bind="attr: {placeholder: ph}, value: input, valueUpdate: 'afterkeydown'">
             <button type="submit" id="submitBtn" data-bind="i18n: 'submitBtn'"></button>
         </form>
         <div class="card">
@@ -45,6 +48,7 @@
                     <button id="stopCounter"
                         data-bind="i18n: 'stopCounter', hidden: startCounter, visible: countdown, click: stopCounter, enable: data().length >= 3">Sayacı
                         Durdur</button>
+                    <button id="RefreshForNewGoals" data-bind="i18n: 'RefreshForNewGoals'" onclick="document.location.reload()"></button>
                 </div>
             </div>
         </div>
@@ -56,6 +60,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
     <script src="i18next-ko.bundle.js"></script>
     <script src="lang.js"></script>
+    <script src="confetti.js"></script>
     <script src="app.js"></script>
 </body>
 

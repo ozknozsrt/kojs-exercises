@@ -42,6 +42,7 @@ select {
   box-shadow: 0 10px 10px #eee;
   margin-top: 15vh;
   position: relative;
+  z-index: 1;
 
   .langchanger {
     display: flex;
@@ -179,7 +180,7 @@ select {
         font-weight: bold;
         letter-spacing: 0.4px;
         cursor: pointer;
-        &:first-of-type {
+        &#startCounter {
           background: #0ebd48;
           color: #fff;
           &:hover {
@@ -190,7 +191,7 @@ select {
             transform-origin: center;
           }
         }
-        &:last-of-type {
+        &#stopCounter {
           background: transparent;
           border: 1px solid #bd140e;
           color: #bd140e;
@@ -203,7 +204,29 @@ select {
             transform-origin: center;
           }
         }
+        &#RefreshForNewGoals {
+          display: none;
+          background: #4555e0;
+          color: #fff;
+          &:hover {
+            background: darken($color: #4555e0, $amount: 6);
+          }
+          &:active {
+            transform: scale(0.98);
+            transform-origin: center;
+          }
+        }
       }
     }
   }
+}
+
+canvas {
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
