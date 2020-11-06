@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WUWN</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+    <div id="login" data-bind="hidden: Name">
+        <form data-bind="submit: formHandler">
+            <label for="Adınız">Size hitap edebilmemiz için lütfen adınızı girin</label>
+            <input type="text" placeholder="Adınızı girin" data-bind="value: Name">
+            <button type="submit">Kaydet</button>
+        </form>
+    </div>
+
+    <div id="wrapper" data-bind="visible: Name">
+
+        <button data-bind="click: play" class="playbutton">
+            Seslendir
+            <img src="images/ui-volume.svg" alt="">
+        </button>
+
+        <header>
+            <div class="logo">WAKE UP !</div>
+            <div class="card">
+                <span>HOŞ GELDİN</span>
+                <h2>Günaydın <span data-bind="text: Name"></span>!</h2>
+                <span class="time">Saat <em>08:30</em></span>
+            </div>
+        </header>
+
+
+
+        <div class="news">
+            <select data-bind="value: kategori">
+                <option value="gundem">Gündem</option>
+                <option value="bilimteknoloji">Bilim/Teknoloji</option>
+            </select>
+            <ul data-bind="foreach: $data">
+                <li>
+                    <a data-bind="attr: {href: $data.link}"><span data-bind="text: $data.title"></span></a>
+                </li>
+            </ul>
+        </div>
+
+
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=7VTmzNkl"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
