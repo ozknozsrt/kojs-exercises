@@ -115,21 +115,44 @@ body {
         }
 
         a {
-          display: block;
-          padding: 10px 0;
+          display: flex;
+          align-items: center;
+          padding: 10px;
           font-size: 14px;
-          color: #333;
+          color: #000;
           border-bottom: 1px solid #eee;
+          border-radius: 5px;
+          transition: 100ms ease-in-out;
+
+          img {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            margin-right: 10px;
+            border-radius: 5px;
+            transition: 150ms ease-in-out;
+            backface-visibility: hidden;
+            border: 1px solid #fff;
+            padding: 2px;
+          }
 
           &:hover {
-            text-decoration: underline;
+            background-color: #f9f9f9;
+            border-color: transparent;
+            transform: translateY(-1px);
+
+
+            img {
+              transform: scale(1.05);
+              box-shadow: 0 5px 10px #eee;
+              border-color: #53b6e4;
+            }
           }
         }
       }
     }
   }
 }
-
 
 #login {
   position: relative;
@@ -176,5 +199,15 @@ body {
         opacity: 0.85;
       }
     }
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    margin: 0 15px;
+  }
+  #login,
+  #wrapper {
+    width: 100%;
   }
 }

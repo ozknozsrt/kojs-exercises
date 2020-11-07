@@ -15,7 +15,7 @@
     <div id="login" data-bind="hidden: Name">
         <form data-bind="submit: formHandler">
             <label for="Adınız">Size hitap edebilmemiz için lütfen adınızı girin</label>
-            <input type="text" placeholder="Adınızı girin" data-bind="value: Name">
+            <input type="text" autofocus placeholder="Adınızı girin" data-bind="value: Name">
             <button type="submit">Kaydet</button>
         </form>
     </div>
@@ -39,13 +39,17 @@
 
 
         <div class="news">
-            <select data-bind="value: kategori">
-                <option value="gundem">Gündem</option>
-                <option value="bilimteknoloji">Bilim/Teknoloji</option>
+            <select data-bind="options: seedData,
+            optionsText: 'text',
+            optionsValue: 'value',
+            value: selectedItem">
             </select>
             <ul data-bind="foreach: $data">
                 <li>
-                    <a data-bind="attr: {href: $data.link}"><span data-bind="text: $data.title"></span></a>
+                    <a data-bind="attr: {href: $data.link}">
+                        <img data-bind="attr: {src: $data.enclosure }">
+                        <span data-bind="text: $data.title"></span>
+                    </a>
                 </li>
             </ul>
         </div>

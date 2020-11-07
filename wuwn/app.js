@@ -2,29 +2,40 @@ var vm = new (function () {
   var self = this;
 
   self.data = ko.observableArray();
-  self.Name = ko.observable(localStorage.getItem('name'));
+  self.Name = ko.observable(localStorage.getItem("name"));
 
+  self.seedData = [
+    {
+      text: "Gündem",
+      value: "gundem",
+      url: "https://t24.com.tr/rss",
+    },
+    {
+      text: "Bilim / Teknoloji",
+      value: "bilimteknoloji",
+      url: "https://t24.com.tr/rss/haber/bilim-teknoloji",
+    },
+  ];
+  
 
-  var bilimteknoloji = "https://t24.com.tr/rss/haber/bilim-teknoloji";
-  var gundem = "https://t24.com.tr/rss";
-  self.kategori = ko.observable(gundem);
+  self.selectedItem = ko.observable(); 
 
-  self.kategori.subscribe(function (e) {
-    if (e == "bilimteknoloji") {
-      self.kategori(bilimteknoloji);
-      self.data().length = 0;
-      sendRequest();
-    } else if (e == "gundem") {
-      self.kategori(gundem);
-      self.data().length = 0;
-      sendRequest();
+  self.selectedItem.subscribe(function (e) {
+    if(e == "gundem") {
+      var getGundem = self.seedData.filter(p => p.value == "gundem");
+      self.data([]);
+      sendRequest(getGundem[0].url);
+    }else if(e == "bilimteknoloji") {
+      var getBilim = self.seedData.filter(p => p.value == "bilimteknoloji");
+      self.data([]);
+      sendRequest(getBilim[0].url);
     }
   });
 
-  function sendRequest() {
+  function sendRequest(kategori) {
     $.ajax({
       type: "GET",
-      url: self.kategori(),
+      url: kategori,
       cache: false,
       dataType: "xml",
       success: function (xml) {
@@ -36,7 +47,15 @@ var vm = new (function () {
               .each(function () {
                 var title = $(this).text();
                 var link = $(this).siblings("link").text();
-                self.data.push({ title: title, link: link });
+                var enclosure = $(this).siblings("enclosure").attr("url");
+                
+
+                self.data.push({
+                  title: title,
+                  link: link,
+                  enclosure: enclosure,
+                });
+
               });
           });
       },
@@ -44,26 +63,34 @@ var vm = new (function () {
   }
 
   self.play = function () {
-    var getTitle = self.data().map(i => i.title).join('');
+    var getTitle = self
+      .data()
+      .map((i) => i.title)
+      .join("");
     var x = JSON.stringify(getTitle);
-    x = x.replace('[', '').replace(']', '');
+    x = x.replace("[", "").replace("]", "");
     responsiveVoice.speak(x, "Turkish Female", { rate: 0.95 });
   };
-   
 
-  self.formHandler = function(e) {
+  self.formHandler = function (e) {
     var name = self.Name();
-    localStorage.setItem('name', name);
-    responsiveVoice.speak("Günaydın " + localStorage.getItem('name') + ", işte bugünkü haberler", "Turkish Female", { rate: 0.95 });
-  }
+    localStorage.setItem("name", name);
+    responsiveVoice.speak(
+      "Günaydın " + localStorage.getItem("name") + ", işte bugünkü haberler",
+      "Turkish Female",
+      { rate: 0.95 }
+    );
+  };
 
-  $(function(){
-    if(self.Name()){
-      responsiveVoice.speak("Günaydın " + localStorage.getItem('name') + ", işte bugünkü haberler", "Turkish Female", { rate: 0.95 });
+  $(function () {
+    if (self.Name()) {
+      responsiveVoice.speak(
+        "Günaydın " + localStorage.getItem("name") + ", işte bugünkü haberler",
+        "Turkish Female",
+        { rate: 0.95 }
+      );
     }
-  })
-
-
+  });
 })();
 
 ko.applyBindings(vm, document.getElementById("wrapper"));
