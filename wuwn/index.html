@@ -46,7 +46,7 @@
             </select>
             <ul data-bind="foreach: $data">
                 <li>
-                    <a data-bind="attr: {href: $data.link}">
+                    <a target="_blank" data-bind="attr: {href: $data.link}">
                         <img data-bind="attr: {src: $data.enclosure }">
                         <span data-bind="text: $data.title"></span>
                     </a>
