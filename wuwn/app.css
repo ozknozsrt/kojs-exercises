@@ -33,10 +33,16 @@ body {
           box-shadow: 0 10px 10px #f7f7f7;
 }
 
-#wrapper .playbutton {
+#wrapper .topbuttons {
   position: absolute;
   top: -50px;
   right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#wrapper .topbuttons .playbutton {
   width: 115px;
   background: #7f27d1;
   color: #fff;
@@ -58,13 +64,95 @@ body {
   cursor: pointer;
 }
 
-#wrapper .playbutton img {
+#wrapper .topbuttons .playbutton img {
   width: 16px;
   display: block;
 }
 
-#wrapper .playbutton:hover {
+#wrapper .topbuttons .playbutton:hover {
   opacity: 0.85;
+}
+
+#wrapper .topbuttons .burcbutton {
+  background: #a2cf00;
+  color: #fff;
+  padding: 10px 13px;
+  border: 0;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+#wrapper .topbuttons .burcbutton:hover {
+  opacity: 0.85;
+}
+
+#wrapper .burcmodal {
+  position: absolute;
+  z-index: 1;
+  top: 5%;
+  width: 320px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.6);
+          box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.6);
+}
+
+#wrapper .burcmodal .modal-title {
+  background: #f7f7f7;
+  padding: 12px 15px;
+  border-radius: 5px 5px 0 0;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#wrapper .burcmodal .modal-title .cls {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+#wrapper .burcmodal .modal-title .cls:hover {
+  opacity: 0.7;
+}
+
+#wrapper .burcmodal .modal-body {
+  background: #fff;
+  padding: 20px;
+  border-radius: 0 0 5px 5px;
+}
+
+#wrapper .burcmodal .modal-body .burc {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+#wrapper .burcmodal .modal-body .yorum {
+  font-size: 14px;
 }
 
 #wrapper .logo {

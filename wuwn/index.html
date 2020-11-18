@@ -22,20 +22,34 @@
 
     <div id="wrapper" data-bind="visible: Name">
 
-        <button data-bind="click: play" class="playbutton">
-            Seslendir
-            <img src="images/ui-volume.svg" alt="">
-        </button>
+        <div class="burcmodal" data-bind="fadeVisible: burcModalHandler() == true">
+            <div class="modal-title">Burç Yorumu <div class="cls" data-bind="click: burcModalHandler(false)">&times;</div></div>
+            <div class="modal-body"> 
+                <div class="burc" data-bind="text: burcadi"></div>
+                <div class="yorum" data-bind="text: burcyorumu"></div>
+            </div>
+        </div>
+
+        <div class="topbuttons">
+
+            <button data-bind="click: burcmodal" class="burcbutton">
+                Burç yorumu
+            </button>
+
+            <button data-bind="click: play" class="playbutton">
+                Seslendir
+                <img src="images/ui-volume.svg" alt="">
+            </button>
+        </div>
 
         <header>
             <div class="logo">WAKE UP !</div>
             <div class="card">
                 <span>HOŞ GELDİN</span>
                 <h2>Günaydın <span data-bind="text: Name"></span>!</h2>
-                <span class="time">Saat <em>08:30</em></span>
+                <span class="time">Saat <em data-bind="text: dateNow">08:30</em></span>
             </div>
         </header>
-
 
 
         <div class="news">
