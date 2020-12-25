@@ -1,0 +1,167 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #222;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+:focus {
+  outline: none;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+#app {
+  width: 320px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  height: 300px;
+  margin: 10px;
+}
+
+#app .title {
+  margin: auto;
+  color: #fafafa;
+  text-align: center;
+  font-weight: bold;
+  padding: 15px 15px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background: #2f2f2f;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+#app .searchbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#app .searchbox input {
+  width: 100%;
+  background: #3c3c3c;
+  height: 30px;
+  border: 0;
+  color: #e6e6e6;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+#app .searchbox button {
+  background: #585858;
+  border: 0;
+  padding: 0 7px;
+  margin: 0;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+#app .searchbox button img {
+  display: block;
+}
+
+#app ul {
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  list-style: none;
+  overflow-y: auto;
+  height: calc(300px - 50px);
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+
+#app ul::-webkit-scrollbar {
+  width: 3px;
+}
+
+#app ul::-webkit-scrollbar-track {
+  background: #888888;
+}
+
+#app ul::-webkit-scrollbar-thumb {
+  background: #555555;
+}
+
+#app ul::-webkit-scrollbar-thumb:hover {
+  background: #3c3c3c;
+}
+
+#app ul li {
+  display: block;
+  margin-bottom: 7px;
+}
+
+#app ul li:last-child {
+  margin-bottom: 0;
+}
+
+#app ul li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+#app ul li a img {
+  width: 80px;
+  height: 37px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+#app ul li a h4 {
+  color: #fff;
+  padding: 0 10px;
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: normal;
+}
+
+#app ul li a:hover {
+  background: #2f2f2f;
+}
+
+#app ul li a:focus {
+  background: #3c3c3c;
+}
+/*# sourceMappingURL=app.css.map */
