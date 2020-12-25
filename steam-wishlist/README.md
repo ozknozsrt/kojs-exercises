@@ -10,7 +10,7 @@ https://dev.twitch.tv/console/extensions
 More information:  
 https://dev.twitch.tv/docs/extensions/life-cycle/#asset-hosting
 
-## Infos for Steam Api
+## Pieces of information for Steam API
 Public api  
 https://api.steampowered.com/ISteamApps/GetAppList/v2/
 
