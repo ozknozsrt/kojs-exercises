@@ -11,32 +11,19 @@
 
 <body>
 
+
+
     <div id="app">
-        <div class="title">SEARCH GAMES</div>
-        <form class="searchbox" data-bind="submit: submitGameList">
-            <input type="search" autocomplete="off" autofocus placeholder="Search game" data-bind="value: input">
-            <button type="submit"><img src="assets/img/search-black-18dp.svg" alt=""></button>
-        </form>
- 
-        <ul style="margin:0" data-bind="foreach: visibleGames">
+        <div class="title" data-bind="text: title"></div>
+
+        <ul data-bind="foreach: GameList">
             <li>
-                <a href="#" target="_blank" data-bind="click: $root.Selected, event: { contextmenu: $root.rightClick }">
+                <a href="#" target="_blank" data-bind="attr: {href: url}">
                     <img src="" alt="" data-bind="attr: {src: img}" onerror="this.onerror=null;this.src='assets/img/noimg.png';">
                     <h4 data-bind="text: name"></h4>
                 </a>
             </li>
         </ul>
-
-        <div class="title" data-bind="text: title" style="border: 1px solid #555"></div>
-        <ul data-bind="foreach: GameList" style="border:1px solid #555; border-top: 0;">
-            <li>
-                <a href="#" target="_blank" data-bind="click: $root.Selected, event: { contextmenu: $root.rightClick }">
-                    <img src="" alt="" data-bind="attr: {src: img}" onerror="this.onerror=null;this.src='assets/img/noimg.png';">
-                    <h4 data-bind="text: name"></h4>
-                </a>
-            </li>
-            <li data-bind="visible: $data.length > 0"><a href="#"><h4>The list is empty</h4></a></li>
-        </ul> 
     </div>
 
 
@@ -54,7 +41,7 @@
     <script src="assets/js/knockout.firestore.min.js"></script>
         
     <script src="assets/js/fsconfig.js"></script>
-    <script src="assets/js/config.js"></script>
+    <script src="assets/js/panel.js"></script>
 </body>
 
 </html>
