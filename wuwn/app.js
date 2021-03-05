@@ -92,7 +92,7 @@ var vm = new (function () {
     self.burcModalHandler(true);
     var burcname = "terazi";
     var corsproxy = "https://cors-anywhere.herokuapp.com/";
-    $.get(corsproxy + 'http://mahmure.hurriyet.com.tr/astroloji/burclar/' + burcname, function(response) {
+    $.get('https://www.hurriyet.com.tr/mahmure/astroloji/' + burcname + "-burcu", function(response) {
       var dom_nodes = $($.parseHTML(response));
       self.burcadi(dom_nodes.find('.horoscope-menu-title').text())
       self.burcyorumu(dom_nodes.find('.horoscope-detail-tab-content').text())
