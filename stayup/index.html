@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Up</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #timer {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stay Up</h1>
+    <div id="timer">Starting...</div>
+    <script>
+        // Timer functions
+        function startTimer(minutes, onUpdate, onComplete) {
+            const endTime = Date.now() + minutes * 60 * 1000;
+            function updateTimer() {
+                const remaining = endTime - Date.now();
+                if (remaining <= 0) {
+                    onUpdate("00:00");
+                    if (onComplete) onComplete();
+                } else {
+                    const mins = Math.floor(remaining / (60 * 1000));
+                    const secs = Math.floor((remaining % (60 * 1000)) / 1000);
+                    onUpdate(`${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`);
+                    requestAnimationFrame(updateTimer);
+                }
+            }
+            updateTimer();
+        }
+
+        function notify(message, callback) {
+            if ("Notification" in window && Notification.permission === "granted") {
+                new Notification(message);
+            } else if ("Notification" in window && Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification(message);
+                    } else {
+                        alert(message);
+                    }
+                });
+            } else {
+                alert(message);
+            }
+            if (callback) callback();
+        }
+
+        function askQuestion(question, yesCallback, noCallback) {
+            const response = confirm(question);
+            if (response && yesCallback) {
+                yesCallback();
+            } else if (!response && noCallback) {
+                noCallback();
+            }
+        }
+
+        // Routine init function
+        function startRoutine() {
+            const timerElement = document.getElementById("timer");
+
+            // Start 1 hour timer
+            startTimer(60, time => {
+                timerElement.textContent = time;
+            }, () => {
+                notify("Stand up", () => {
+                    // Start 30 minutes timer
+                    startTimer(30, time => {
+                        timerElement.textContent = time;
+                    }, () => {
+                        askQuestion(
+                            "Excercise? (Ok: Yes, Cancel: No)",
+                            () => {
+                                // Start 5 minutes timer
+                                startTimer(5, time => {
+                                    timerElement.textContent = time;
+                                }, () => {
+                                    notify("Sit down", startRoutine); // Routine restart
+                                });
+                            },
+                            () => {
+                                notify("Sit down", startRoutine); // Routine restart
+                            }
+                        );
+                    });
+                });
+            });
+        }
+
+        // Request notification authorisation
+        if ("Notification" in window && Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
+
+        // Start routine
+        startRoutine();
+    </script>
+</body>
+</html>
