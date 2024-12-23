@@ -15,31 +15,82 @@
             font-size: 48px;
             margin: 20px 0;
         }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <h1>Stay Up</h1>
-    <div id="timer">Starting...</div>
+    <div id="timer">00:00</div>
+    <button id="startPauseBtn">Start</button>
+    <button id="stopBtn">Stop</button>
     <script>
-        // Timer functions
-        function startTimer(minutes, onUpdate, onComplete) {
-            const endTime = Date.now() + minutes * 60 * 1000;
+        let timerInterval = null;
+        let remainingTime = 0;
+        let isPaused = true;
+
+        function playSound() {
+            const audio = new Audio("alarm.mp3"); // Updated sound effect
+            audio.play();
+        }
+
+        function startTimer(duration, onUpdate, onComplete) {
+            const endTime = Date.now() + duration * 60 * 1000;
+
             function updateTimer() {
+                if (isPaused) return;
                 const remaining = endTime - Date.now();
+
                 if (remaining <= 0) {
                     onUpdate("00:00");
-                    if (onComplete) onComplete();
+                    clearInterval(timerInterval);
+                    if (onComplete) {
+                        playSound();
+                        onComplete();
+                    }
                 } else {
                     const mins = Math.floor(remaining / (60 * 1000));
                     const secs = Math.floor((remaining % (60 * 1000)) / 1000);
                     onUpdate(`${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`);
-                    requestAnimationFrame(updateTimer);
                 }
             }
+
+            timerInterval = setInterval(updateTimer, 1000);
             updateTimer();
         }
 
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            remainingTime = 0;
+            isPaused = true;
+            document.getElementById("timer").textContent = "00:00";
+            document.getElementById("startPauseBtn").textContent = "Start";
+        }
+
+        function toggleTimer() {
+            const button = document.getElementById("startPauseBtn");
+            if (isPaused) {
+                isPaused = false;
+                if (remainingTime === 0) {
+                    startRoutine();
+                }
+                button.textContent = "Pause";
+            } else {
+                isPaused = true;
+                button.textContent = "Start";
+            }
+        }
+
+        function updateDisplay(time) {
+            document.getElementById("timer").textContent = time;
+        }
+
         function notify(message, callback) {
+            //playSound();
             if ("Notification" in window && Notification.permission === "granted") {
                 new Notification(message);
             } else if ("Notification" in window && Notification.permission !== "denied") {
@@ -65,45 +116,27 @@
             }
         }
 
-        // Routine init function
         function startRoutine() {
-            const timerElement = document.getElementById("timer");
-
             // Start 1 hour timer
-            startTimer(60, time => {
-                timerElement.textContent = time;
-            }, () => {
-                notify("Stand up", () => {
-                    // Start 30 minutes timer
-                    startTimer(30, time => {
-                        timerElement.textContent = time;
-                    }, () => {
-                        askQuestion(
-                            "Excercise? (Ok: Yes, Cancel: No)",
-                            () => {
-                                // Start 5 minutes timer
-                                startTimer(5, time => {
-                                    timerElement.textContent = time;
-                                }, () => {
-                                    notify("Sit down", startRoutine); // Routine restart
-                                });
-                            },
-                            () => {
-                                notify("Sit down", startRoutine); // Routine restart
-                            }
-                        );
+            startTimer(60, updateDisplay, () => {
+                notify("Stand up!", () => {
+                    // Start 30-minute timer
+                    startTimer(30, updateDisplay, () => {
+                        askQuestion("Exercise? (OK for Yes, Cancel for No)", () => {
+                            // Start 5-minute exercise timer
+                            startTimer(5, updateDisplay, () => {
+                                notify("Sit down!", startRoutine);
+                            });
+                        }, () => {
+                            notify("Sit down!", startRoutine);
+                        });
                     });
                 });
             });
         }
 
-        // Request notification authorisation
-        if ("Notification" in window && Notification.permission !== "granted") {
-            Notification.requestPermission();
-        }
-
-        // Start routine
-        startRoutine();
+        document.getElementById("startPauseBtn").addEventListener("click", toggleTimer);
+        document.getElementById("stopBtn").addEventListener("click", stopTimer);
     </script>
 </body>
 </html>
