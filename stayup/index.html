@@ -27,6 +27,7 @@
     <div id="timer">00:00</div>
     <button id="startPauseBtn">Start</button>
     <button id="stopBtn">Stop</button>
+
     <script>
         let timerInterval = null;
         let remainingTime = 0;
@@ -38,19 +39,20 @@
         }
 
         function startTimer(duration, onUpdate, onComplete) {
-            const endTime = Date.now() + duration * 60 * 1000;
+            const startTime = Date.now();
+            const effectiveDuration = remainingTime > 0 ? remainingTime : duration * 60 * 1000;
+            const endTime = startTime + effectiveDuration;
 
             function updateTimer() {
                 if (isPaused) return;
                 const remaining = endTime - Date.now();
+                remainingTime = Math.max(0, remaining); // Kalan süreyi kaydet
 
                 if (remaining <= 0) {
                     onUpdate("00:00");
                     clearInterval(timerInterval);
-                    if (onComplete) {
-                        playSound();
-                        onComplete();
-                    }
+                    remainingTime = 0; // Sıfırla
+                    if (onComplete) onComplete();
                 } else {
                     const mins = Math.floor(remaining / (60 * 1000));
                     const secs = Math.floor((remaining % (60 * 1000)) / 1000);
@@ -75,12 +77,14 @@
             const button = document.getElementById("startPauseBtn");
             if (isPaused) {
                 isPaused = false;
-                if (remainingTime === 0) {
+                if (!timerInterval) { // Timer zaten çalışmıyorsa başlat
                     startRoutine();
                 }
                 button.textContent = "Pause";
             } else {
                 isPaused = true;
+                clearInterval(timerInterval);
+                timerInterval = null; // Timer'ı durdur
                 button.textContent = "Start";
             }
         }
@@ -90,21 +94,30 @@
         }
 
         function notify(message, callback) {
-            //playSound();
+            // playSound(); Commented out for now
             if ("Notification" in window && Notification.permission === "granted") {
-                new Notification(message);
+                const notification = new Notification(message);
+                notification.onclick = () => {
+                    window.focus();
+                    if (callback) callback();
+                };
             } else if ("Notification" in window && Notification.permission !== "denied") {
                 Notification.requestPermission().then(permission => {
                     if (permission === "granted") {
-                        new Notification(message);
+                        const notification = new Notification(message);
+                        notification.onclick = () => {
+                            window.focus();
+                            if (callback) callback();
+                        };
                     } else {
                         alert(message);
+                        if (callback) callback();
                     }
                 });
             } else {
                 alert(message);
+                if (callback) callback();
             }
-            if (callback) callback();
         }
 
         function askQuestion(question, yesCallback, noCallback) {
@@ -122,7 +135,7 @@
                 notify("Stand up!", () => {
                     // Start 30-minute timer
                     startTimer(30, updateDisplay, () => {
-                        askQuestion("Exercise? (OK for Yes, Cancel for No)", () => {
+                        askQuestion("Exercise?", () => {
                             // Start 5-minute exercise timer
                             startTimer(5, updateDisplay, () => {
                                 notify("Sit down!", startRoutine);
