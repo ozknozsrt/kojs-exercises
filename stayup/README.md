@@ -6,3 +6,4 @@ After 1 hour of sitting, you can work standing for 30 minutes. Then 5 minutes of
 
 [Demo](https://ozknozsrt.github.io/kojs-exercises/stayup/)
 
+![Diagram](diagram.svg)
