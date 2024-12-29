@@ -34,7 +34,7 @@
         let isPaused = true;
 
         function playSound() {
-            const audio = new Audio("alarm.mp3"); // Updated sound effect
+            const audio = new Audio("alarm.mp3");
             audio.play();
         }
 
@@ -46,12 +46,12 @@
             function updateTimer() {
                 if (isPaused) return;
                 const remaining = endTime - Date.now();
-                remainingTime = Math.max(0, remaining); // Kalan süreyi kaydet
+                remainingTime = Math.max(0, remaining);
 
                 if (remaining <= 0) {
                     onUpdate("00:00");
                     clearInterval(timerInterval);
-                    remainingTime = 0; // Sıfırla
+                    remainingTime = 0;
                     if (onComplete) onComplete();
                 } else {
                     const mins = Math.floor(remaining / (60 * 1000));
@@ -77,14 +77,14 @@
             const button = document.getElementById("startPauseBtn");
             if (isPaused) {
                 isPaused = false;
-                if (!timerInterval) { // Timer zaten çalışmıyorsa başlat
+                if (!timerInterval) {
                     startRoutine();
                 }
                 button.textContent = "Pause";
             } else {
                 isPaused = true;
                 clearInterval(timerInterval);
-                timerInterval = null; // Timer'ı durdur
+                timerInterval = null;
                 button.textContent = "Start";
             }
         }
@@ -94,21 +94,26 @@
         }
 
         function notify(message, callback) {
-            // playSound(); Commented out for now
             if ("Notification" in window && Notification.permission === "granted") {
                 const notification = new Notification(message);
-                notification.onclick = () => {
-                    window.focus();
-                    if (callback) callback();
-                };
+                if (callback) {
+                    notification.onclick = () => {
+                        window.focus();
+                        callback();
+                        notification.close();
+                    };
+                }
             } else if ("Notification" in window && Notification.permission !== "denied") {
                 Notification.requestPermission().then(permission => {
                     if (permission === "granted") {
                         const notification = new Notification(message);
-                        notification.onclick = () => {
-                            window.focus();
-                            if (callback) callback();
-                        };
+                        if (callback) {
+                            notification.onclick = () => {
+                                window.focus();
+                                callback();
+                                notification.close();
+                            };
+                        }
                     } else {
                         alert(message);
                         if (callback) callback();
@@ -121,28 +126,44 @@
         }
 
         function askQuestion(question, yesCallback, noCallback) {
-            const response = confirm(question);
-            if (response && yesCallback) {
-                yesCallback();
-            } else if (!response && noCallback) {
-                noCallback();
+            if ("Notification" in window && Notification.permission === "granted") {
+                const notification = new Notification(question, {
+                    body: "Click to answer",
+                    requireInteraction: true
+                });
+
+                notification.onclick = () => {
+                    window.focus();
+                    if (yesCallback) yesCallback();
+                    notification.close();
+                };
+
+                notification.onclose = () => {
+                    if (noCallback) noCallback();
+                    else startRoutine(); // Ensure the routine continues if noCallback is not provided.
+                };
+            } else {
+                const response = confirm(question);
+                if (response && yesCallback) {
+                    yesCallback();
+                } else if (!response && noCallback) {
+                    noCallback();
+                } else {
+                    startRoutine();
+                }
             }
         }
 
         function startRoutine() {
-            // Start 1 hour timer
             startTimer(60, updateDisplay, () => {
-                notify("Stand up!", () => {
-                    // Start 30-minute timer
-                    startTimer(30, updateDisplay, () => {
-                        askQuestion("Exercise?", () => {
-                            // Start 5-minute exercise timer
-                            startTimer(5, updateDisplay, () => {
-                                notify("Sit down!", startRoutine);
-                            });
-                        }, () => {
+                notify("Stand up!");
+                startTimer(30, updateDisplay, () => {
+                    askQuestion("Exercise?", () => {
+                        startTimer(5, updateDisplay, () => {
                             notify("Sit down!", startRoutine);
                         });
+                    }, () => {
+                        notify("Sit down!", startRoutine);
                     });
                 });
             });
